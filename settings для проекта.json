@@ -1,52 +1,88 @@
 {
-    "git.autoRepositoryDetection": "subFolders",
-    "breadcrumbs.enabled": true,
+    // ======================
+    // 1. НАСТРОЙКИ ИНТЕРФЕЙСА
+    // ======================
+    "breadcrumbs.enabled": true,  // Включение "хлебных крошек" для навигации
+    "editor.cursorBlinking": "blink",  // Анимация мигания курсора
 
-    "python.languageServer": "Pylance",
-    "python.analysis.typeCheckingMode": "off",
-    "python.analysis.diagnosticMode": "openFilesOnly",
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.completeFunctionParens": true,
-    "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.analysis.importFormat": "absolute",
-    "python.analysis.enablePytestSupport": true,
-    "python.analysis.indexing": true,
-    "python.analysis.packageIndexDepths": [
-        {
-            "name": "django",
-            "depth": 3,
-            "includeAllSymbols": true
-        }
+    // ======================
+    // 2. НАСТРОЙКИ GIT
+    // ======================
+    "git.autoRepositoryDetection": "subFolders",  // Автопоиск git-репозиториев в подпапках
+
+    // ======================
+    // 3. АВТОМАТИЗАЦИЯ
+    // ======================
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+
+    // ======================
+    // 4. НАСТРОЙКИ PYTHON
+    // ======================
+    "python.languageServer": "Pylance",  // Использование Pylance для анализа кода
+    "python.analysis.typeCheckingMode": "basic",  // Базовая проверка типов
+    "python.analysis.diagnosticMode": "workspace",  // Полный анализ всего проекта
+    "python.analysis.useLibraryCodeForTypes": true,  // Ускорение автодополнения
+    "python.analysis.autoSearchPaths": true,  // Автопоиск Python-путей
+    "python.analysis.autoImportCompletions": true,  // Автодополнение импортов
+    "python.analysis.completeFunctionParens": true,  // Автодополнение скобок
+    "python.analysis.inlayHints.variableTypes": true,  // Подсказки типов для переменных
+    "python.analysis.inlayHints.functionReturnTypes": true,  // Подсказки типов возвращаемых значений
+    "python.analysis.importFormat": "absolute",  // Использование абсолютных импортов
+    "python.analysis.enablePytestSupport": true,  // Поддержка pytest
+    "python.analysis.indexing": true,  // Индексация кода для поиска
+
+    // Настройки линтинга
+    "python.linting.enabled": true,  // Включение линтинга
+    "python.linting.pylintEnabled": true,  // Использование pylint
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",  // Плагин для Django
+        "--django-settings-module=django_orm.settings"  // Указание модуля настроек
     ],
-      
+    "python.formatting.provider": "black",  // Форматирование кода с помощью Black
+
+    // Форматирование Python-кода
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+
+    // ======================
+    // 5. НАСТРОЙКИ DJANGO
+    // ======================
     "emmet.includeLanguages": {
-        "django-html": "html"
+        "django-html": "html"  // Поддержка Emmet в Django-шаблонах
     },
     "files.associations": {
-        "**/*.html": "html",
-        "**/templates/*/*.html": "django-html",
-        "**/templates/*/*/*.html": "django-html",
-        "**/templates/*": "django-html",
-        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+        "**/templates/*.html": "django-html",  // Распознавание шаблонов
+        "**/requirements*.txt": "pip-requirements"  // Распознавание requirements-файлов
     },
-    "django.snippets.exclude": [
-        "cms",
-        "wagtail"
-    ],
 
 
+    // Настройки Django-шаблонов
     "[django-html]": {
-        "editor.defaultFormatter": "batisteo.vscode-django",
-        "breadcrumbs.showClasses": true,
-        "editor.quickSuggestions": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",  // Форматирование шаблонов
+        "breadcrumbs.showClasses": true,  // Показ классов в навигации
+        "editor.quickSuggestions": {  // Настройки автодополнения
             "other": true,
             "comments": true,
             "strings": true
         }
-    }
+    },
+
+    // ======================
+    // 6. НАСТРОЙКИ БАЗ ДАННЫХ
+    // ======================
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,  // Лимит записей в предпросмотре
+            "server": "localhost",  // Адрес сервера
+            "port": 5432,  // Порт PostgreSQL
+            "driver": "PostgreSQL",  // Тип БД
+            "name": "hr",  // Имя подключения
+            "database": "hr",  // Имя БД
+            "username": "hr",  // Пользователь
+            "askForPassword": true  // Запрос пароля при подключении
+        }
+    ]
 }
